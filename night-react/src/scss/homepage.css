@@ -1,0 +1,12 @@
+.ui.image img, .ui.image svg {
+	height: 180px;
+	max-width: 120px;
+}
+
+#move {
+	position: relative;
+	/*top:50px;*/
+}
+
+
+/*///////////////////////*/

@@ -9,4 +9,41 @@
 }
 
 
+#but1 {
+	background-color: #2185d0 !important;
+	/*border: 2px solid black;*/
+}
+#but1:hover {
+	background-color: #1678c2 !important;
+    color: #fff;
+    text-shadow: none;	
+}
+
+.but1 {
+	background-color: #db2828 !important;
+}
+.but1:hover {
+	background-color: #c42121 !important;
+    color: #fff;
+    text-shadow: none;
+}
+
+#but0 {
+	background-color: #db2828 !important;
+	/*border: 2px solid black;*/
+}
+#but0:hover {
+	background-color: #c42121 !important;
+    color: #fff;
+    text-shadow: none;	
+}
+.but0 {
+	background-color: #2185d0 !important;
+}
+.but0:hover {
+	background-color: #1678c2 !important;
+    color: #fff;
+    text-shadow: none;
+}
+
 /*///////////////////////*/

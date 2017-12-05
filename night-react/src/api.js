@@ -17,6 +17,8 @@ export default {
 	venues: {
 		addDestination: data =>
 			axios.post("/api/data/going", { data })//.then(res => console.log(res.data))
-				.then(res => res.data.venue)			
+				.then(res => res.data.venue),
+		fetchVenues: (data)=> axios.post('/api/data/userGoing', {data})
+		 // .then(res=> res.data.venues)	
 	}
 };

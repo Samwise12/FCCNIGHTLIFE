@@ -28,4 +28,10 @@ const d = update(x, {
 })
 
 
-console.log(d);
+// console.log(d);
+
+let z1 = [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+// console.log(z1.filter(Number))
+
+// console.log(z1.filter(num => num !== 0))

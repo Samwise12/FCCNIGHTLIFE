@@ -2,22 +2,58 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Form, List, Image, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import zipObject from "lodash/zipObject";
+import findKey from "lodash/findKey";
 
 import '../../scss/homepage.css';
 
-const ListBars = (cache, props, method1, numGoing) => {// AppForm
+const ListBars = (cache, props, method1, numGoing, userList) => {// AppForm
   // console.log(props.isConfirmed)
-  // console.log(numGoing);
+  // console.log(userList);
+  let n1 = Object.keys(userList.filter(Number)).map(n => parseInt(n, 10));
+  // console.log(Object.entries(userList))
+  let m = Object.entries(userList).filter(num => num[1]);
+  let m2 = m.map(m => parseInt(m[0], 10));
+  let findIndex = zipObject(n1, m2);
   let x = [];
+
   for (let [index, thing] of cache.entries()) {
-    // console.log('thing:',thing);
-    // console.log(numGoing[index]);
     x.push(<List divided key={Date.now()+x.length}>
       <List.Item >
         <hr />        
           <List.Content id="move" floated="right">
-          <Button primary onClick={
+          <Button primary className={'but'+userList[index].toString()}
+           /*id={'but'+userList[index].toString()+index}*/  onClick={
                       (e)=>{
+                          let innerValue = document.body.children[1].children[0] //BRUTE FORCE METHOD!!!
+                            .children[0].children[4].children[1].children[index]
+                            .children[0].children[1].children[0];
+                          let addValue = parseInt(innerValue.innerHTML[0],10)+ 1;
+                          let subtractValue = parseInt(innerValue.innerHTML[0],10)- 1;
+                        if(userList[index] === 1 && props.isConfirmed){
+                          if(document.getElementsByClassName("ui button but1")[findKey(findIndex, o=> o === index )].id === "but1") {
+                          document.getElementsByClassName("ui button but1")[findKey(findIndex, o=> o === index )].id = "but1b"
+                          innerValue.innerHTML = addValue.toString()+' Going' 
+                          setTimeout(function(){
+                            document.getElementsByClassName("ui button but1")[findKey(findIndex, o=> o === index )].id = "but1b"
+                          }, 5000)                         
+                          } else {
+                          document.getElementsByClassName("ui button but1")[findKey(findIndex, o=> o === index )].id = "but1"                            
+                          innerValue.innerHTML = subtractValue.toString()+' Going'
+                          }
+                          // console.log(findIndex)
+                          // console.log( findKey(findIndex, o=> o === index ) )
+                        }
+                        if(userList[index] === 0 && props.isConfirmed){                    
+                          if(innerValue.id === 'but0') {
+                            innerValue.id = 'but0b';
+                            innerValue.innerHTML = subtractValue.toString()+' Going'
+                          } else {
+                          innerValue.id = 'but0'                            
+                          innerValue.innerHTML = addValue.toString()+' Going'
+                          }                          
+                        }                        
                         if(props.isConfirmed) {
                           // console.log(numGoing)
                           let x = {thing, cache}
@@ -50,25 +86,6 @@ const ListBars = (cache, props, method1, numGoing) => {// AppForm
   return (
     <div>{x}</div>
     )
-  /*return (
-    <List>
-      <List.Item>
-        <hr />
-        <Image href={cache[0].url} rounded size='small' src={cache[0].image_url} />
-        <List.Content>
-          <List.Header >{cache[0].name}</List.Header>
-          <List.Description>
-          {cache[0].location.display_address[0]}, {cache[0].location.state}
-          <br />
-          {cache[0].display_phone}
-          <br />
-          Rating: {cache[0].rating}
-          </List.Description>
-        </List.Content>
-        <hr />
-      </List.Item>
-    </List>
-    )*/
 }
 
 class App extends Component {  //HomePage is container
@@ -78,7 +95,10 @@ class App extends Component {  //HomePage is container
       table: undefined,
       numGoing: [],
       update: false
-    }
+    };
+/*    componentDidMount(){
+      this.props.userVenues()
+    };*/
     componentDidUpdate(prevProps, prevState) {
       // console.log('update', this.state.update);
       const { table, cache/*, update*/ } = this.state;
@@ -102,12 +122,19 @@ class App extends Component {  //HomePage is container
           }
       }
         // console.log('update')
-        // console.log(cache);
-      axios.post('/api/data/showGoing', { cache }).then(res => {
-        console.log(res.data.getList);
-        let callTable = ListBars(cache, this.props, this.method1, res.data.getList);
-      this.setState({table: callTable, numGoing: res.data.getList})                
-      })  
+        // console.log(cache);        
+        // console.log(this.props.citeVenues)
+      axios.post('/api/data/showGoing', { cache }).then(res => {//On Load
+        // console.log(res.data.getList);
+        this.props.userVenues(cache).then(response=> {
+         // console.log(response.data.userList)
+      let callTable = ListBars(cache, this.props, this.method1,
+       res.data.getList, response.data.userList);
+      this.setState({table: callTable, numGoing: res.data.getList})                        
+        })        
+      })/*.then(()=>
+      this.props.userVenues(cache).then(res=> console.log(res.data.userList)) // axios.get('/api/data/userGoing')
+      )  */
     };
     onSubmit = e => {
       e.preventDefault();
@@ -132,7 +159,7 @@ axios.post('/api/data/showGoing', { cache }).then(res => {
     // this.setState({update: true})
     };
   render() {
-    // console.log(this.state)
+    // console.log(this.props.citeVenues)
     const { loading, table } = this.state;
     return (<div>
       <Form onSubmit={this.onSubmit} loading={loading} >
@@ -145,7 +172,14 @@ axios.post('/api/data/showGoing', { cache }).then(res => {
 }
 
 App.contextTypes = {
-  router: PropTypes.object.isRequired
+  router: PropTypes.object.isRequired,
+  citeVenues: PropTypes.func
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    citeVenues: state.venues
+  }
+}
+
+export default connect(mapStateToProps)(App);

@@ -1,15 +1,20 @@
 import api from '../api';
-import { VENUE_ADD, VENUE_REMOVE } from '../types';
+import { VENUE_ADD, VENUE_REMOVE/*, VENUE_FETCHED*/  } from '../types';
 
-export const addVenue = venue => ({
+const addVenue = venue => ({
 	type: VENUE_ADD,
 	venue
 });
 
-export const removeVenue = venue => ({
+const removeVenue = venue => ({
 	type: VENUE_REMOVE,
 	venue
 });
+
+/*const venuesFetched = data => ({
+	type: VENUE_FETCHED,
+	data
+})*/
 
 export const addDestination = data => dispatch =>
 	api.venues
@@ -23,6 +28,15 @@ export const addDestination = data => dispatch =>
 			};
 	});
 
-
+export const userGoing = data => dispatch => {
+	// console.log(data);
+	return (
+		 api.venues
+		.fetchVenues(data)
+/*		.then(venues => console.log(venues)
+				// dispatch(venuesFetched(venues.data.venues))
+			)*/
+		)
+}
 
 

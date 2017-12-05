@@ -1,4 +1,4 @@
-import { VENUE_ADD, VENUE_REMOVE } from "../types";
+import { VENUE_ADD, VENUE_REMOVE, VENUE_FETCHED } from "../types";
 // import omitBy from 'lodash/omit';
 
 let id = []; 
@@ -14,6 +14,9 @@ export default function books(state = {}, action = {}) {
 		case VENUE_REMOVE: 		
 			// console.log(state);
 			return state;
+		case VENUE_FETCHED:
+			// console.log(...action.data)			
+			return {...action.data}
     default:
       return state;
   }

@@ -33,18 +33,46 @@ router.post('/', (req, res) => {
 	// res.status(200).json({success: 'success'})
 });
 
-router.post('/showGoing', (req,res) => {
-  // const { id } = req.body.cache[2]
-  //console.log(req.body.cache[0].id)
-   // console.log(req.body.cache)
-  let arr = [];
-
+router.post('/userGoing', authenticate, (req, res) => {
+  // console.log(req.body.data[0].id)
+  console.log(req.currentUser.id)
+let arr = [];
 async function asyncForEach(array, callback) {
   for (let index = 0; index < array.length; index++) {
     await callback(array[index], index, array)
   }
 };
+const start = async () => {
+  await asyncForEach(req.body.data, async (num, i) => {
+    await Venue.count({ id: req.body.data[i].id, userId: req.currentUser.id }, (err, c) => {
+      // console.log('count:', c)
+      arr.push(c)
+       // console.log(arr)
+    });     
+  })
+  // console.log('arr: ',arr);
+}  
+start().then(response => {
+  res.status(200).json({userList: arr})
+}).catch(err => console.log(500));
+/*  Venue.find({"userId" : ObjectId(req.currentUser.id)})
+  .then(venues => {
+    console.log('arr:',arr);
+    res.json({ venues })}
+    )  */
 
+});
+
+router.post('/showGoing', (req,res) => {
+  // const { id } = req.body.cache[2]
+  //console.log(req.body.cache[0].id)
+   // console.log(req.body.cache)  
+  let arr = [];
+async function asyncForEach(array, callback) {
+  for (let index = 0; index < array.length; index++) {
+    await callback(array[index], index, array)
+  }
+};
 const start = async () => {
   await asyncForEach(req.body.cache, async (num, i) => {
     await Venue.count({ id: req.body.cache[i].id }, (err, c) => {
@@ -57,19 +85,16 @@ const start = async () => {
   // console.log('arr: ',arr);
 }
 
-Venue.find({"userId" : ObjectId(req.currentUser.id)})
-  .then(venues => res.status(200).json({ venues }))
-
 // console.log('route showGoing')
-/*start().then(response =>
+start().then(response =>
     res.status(200).json({ getList: arr })  //Get LIST IS THE ISSUE FIX /GOING TOMORROW!!!!!         
-  ).catch(err => res.status(500).console.log(err) );*/
+  ).catch(err => console.log(err) );
 
 });
 
 router.post('/going', authenticate, (req, res) => {
   const { id } = req.body.data.thing;
-  // console.log(req.currentUser._id);
+  console.log(req.currentUser._id);
   // console.log(req.body)
   // console.log('id:', id);
   let arr = [];

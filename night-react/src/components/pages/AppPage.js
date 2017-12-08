@@ -9,14 +9,15 @@ import findKey from "lodash/findKey";
 import '../../scss/homepage.css';
 
 const ListBars = (cache, props, method1, numGoing, userList) => {// AppForm
-  // console.log(props.isConfirmed)
+  console.log(props.isConfirmed)
   // console.log(userList);
+  let x = [];
+  if(props.isConfirmed) {    
   let n1 = Object.keys(userList.filter(Number)).map(n => parseInt(n, 10));
   // console.log(Object.entries(userList))
   let m = Object.entries(userList).filter(num => num[1]);
   let m2 = m.map(m => parseInt(m[0], 10));
   let findIndex = zipObject(n1, m2);
-  let x = [];
 
   for (let [index, thing] of cache.entries()) {
     x.push(<List divided key={Date.now()+x.length}>
@@ -83,6 +84,39 @@ const ListBars = (cache, props, method1, numGoing, userList) => {// AppForm
     </List>
     );
   }
+  } else {
+  for (let [index, thing] of cache.entries()) {
+    x.push(<List divided key={Date.now()+x.length}>
+      <List.Item >
+        <hr />        
+          <List.Content id="move" floated="right">
+          <Button primary className={'but0'}
+           /*id={'but'+userList[index].toString()+index}*/  onClick={
+                      (e)=>{                        
+                        if(!props.isConfirmed){                    
+                            alert('Must Login')
+                        }                        
+                      }
+                    }>{numGoing[index]} Going</Button>              
+
+          </List.Content>
+        <Image href={thing.url} rounded src={thing.image_url} />  
+        <List.Content>
+            <List.Header >{thing.name}</List.Header>          
+          <List.Description>
+          {thing.location.display_address[0]}, {thing.location.state}
+          <br />
+          {thing.display_phone}
+          <br />
+          Rating: {thing.rating}
+          </List.Description>
+        </List.Content>
+        <hr />
+      </List.Item>
+    </List>
+    );
+  };
+  }; //end if-else
   return (
     <div>{x}</div>
     )

@@ -3,6 +3,7 @@ import yelp from 'yelp-fusion';
 
 import Venue from '../models/Venue';
 import authenticate from '../middlewares/authenticate';
+import authNoUser from '../middlewares/authNoUser';
 import parseErrors from "../utils/parseErrors";
 // var ObjectId = require('mongodb').ObjectID;
 import { ObjectId } from 'mongodb';
@@ -33,9 +34,14 @@ router.post('/', (req, res) => {
 	// res.status(200).json({success: 'success'})
 });
 
-router.post('/userGoing', authenticate, (req, res) => {
+router.post('/userGoing', authNoUser, (req, res) => {
   // console.log(req.body.data[0].id)
-  console.log(req.currentUser.id)
+  // console.log(req.currentUser.id)
+  // console.log('req.currentUser:', req.currentUser)
+  if(!req.currentUser){
+    res.status(200).json({message: 'noArrNecessary'})
+  }
+
 let arr = [];
 async function asyncForEach(array, callback) {
   for (let index = 0; index < array.length; index++) {
@@ -54,7 +60,7 @@ const start = async () => {
 }  
 start().then(response => {
   res.status(200).json({userList: arr})
-}).catch(err => console.log(500));
+}).catch(err => console.log(err));
 /*  Venue.find({"userId" : ObjectId(req.currentUser.id)})
   .then(venues => {
     console.log('arr:',arr);
@@ -94,45 +100,26 @@ start().then(response =>
 
 router.post('/going', authenticate, (req, res) => {
   const { id } = req.body.data.thing;
-  console.log(req.currentUser._id);
+  // console.log(req.currentUser._id);
   // console.log(req.body)
   // console.log('id:', id);
-  let arr = [];
-  async function asyncForEach(array, callback) {
-    for (let index = 0; index < array.length; index++) {
-      await callback(array[index], index, array)
-    }
-  };  
-
-  const start = async () => {
-      await asyncForEach(req.body.data.cache, async (num, i) => {
-        await Venue.count({ id: req.body.data.cache[i].id }, (err, c) => {
-          // console.log('count:', c)
-          arr.push(c)
-           // console.log(arr)
-        });     
-
-      })
-      console.log('arr: ',arr);
-    }
-  Venue.findOne({"userId" : ObjectId(req.currentUser.id), "id": id})
+  Venue.findOrCreate({ id, "userId": ObjectId(req.currentUser.id) }, function(err, venue) {
+    if(err) throw err;
+    console.log('Found or Created: ', venue);
+  });
+    res.json({success: true}).end();
+/*  Venue.findOne({"userId" : ObjectId(req.currentUser.id), "id": id})
     .then(response => {
      if(response){
       Venue.remove({ userId: req.currentUser.id, id: id })
           .then(res.status(200).json({ error: "can\'t vote twice" }) )
-          // .then(
-          //   start()
-          //   )
           .catch(err => res.status(400).json({ errors: parseErrors(err.errors) }))      
    } else if(!response) {
-    Venue.create({ userId: req.currentUser.id, id: id })
+    Venue.create({ userId: req.currentUser.id, id: id }) //test save()
       .then(venue => res.status(200).json({ venue: id }) )
-      // .then(
-      //   start()
-      //   )
       .catch(err => res.status(400).json({ errors: parseErrors(err.errors) }));      
         }      
-    });
+    });*/
 
 });
 

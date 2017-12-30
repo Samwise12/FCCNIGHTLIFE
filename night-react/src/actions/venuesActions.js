@@ -1,5 +1,5 @@
 import api from '../api';
-import { VENUE_ADD, VENUE_REMOVE/*, VENUE_FETCHED*/  } from '../types';
+import { VENUE_ADD, VENUE_REMOVE, LOCATORS /*, VENUE_FETCHED*/  } from '../types';
 
 const addVenue = venue => ({
 	type: VENUE_ADD,
@@ -39,4 +39,8 @@ export const userGoing = data => dispatch => {
 		)
 }
 
+export const locationSend = locator =>  ({
+	type: LOCATORS,
+	locator
+});
 

@@ -21,16 +21,42 @@ router.post('/', (req, res) => {
         // console.log(accessToken);
         const client = yelp.client(response.jsonBody.access_token);
         // console.log(client)
+        if(locationName === '') {res.status(404).json({no: 'no!'})}
     client.search({
     	term: 'bars',
-    	location: 'New York, NY'//locationName
+    	location: locationName, //'New York, NY',
+      limit: 30
     }).then(response => {
-   		// console.log(response.jsonBody.businesses)
-      // console.log(req.body.locationName)
-      res.status(200).json({data: response.jsonBody.businesses })
-    });
+   		// console.log(response.jsonBody.region.center)
+      // console.log('response.body:',response.jsonBody.businesses)
+      let arr3 = [], arr4=[], regionCenter=response.jsonBody.region.center;
+      response.jsonBody.businesses.forEach(res2 => arr3.push(res2.id))
+      async function test() {
+/*      const arr4 = [];
+      for (let [index, h] of arr3.entries()) {
+       await client.reviews(h).then(response2 => {
+        // console.log(index, response2.jsonBody.reviews[0].text)
+        // console.log(index)
+        // console.log(arr3)
+        arr4.push(response2.jsonBody.reviews[0].text)
+      // res.status(200).json({data: response.jsonBody.businesses, reviews: arr3 })
+      })
+      };*/
+      // console.log(await arr4 )        
+      let arr5 = [] // REMOVE WAITING FOR LOAD TIME SEARCH LOCATION USE ARR4 REVIEWS BELOW TO USE REVIEWS
+       res.status(200).json({data: response.jsonBody.businesses, reviews: arr5, regionCenter:regionCenter })
+      };
+      test();
+
+      /*client.reviews('the-dead-rabbit-new-york').then(response2 => {
+        // console.log(response2.jsonBody.reviews[0].text)
+        // console.log(arr3)
+      res.status(200).json({data: response.jsonBody.businesses, reviews: arr3 })
+      }).catch(e => console.log(e));*/
+    }).catch(err => console.log(err));
       }).catch(err=> {console.log(err);});
 
+    // res.status(200).json({data: response.jsonBody.businesses, reviews: arr3 })
 	// res.status(200).json({success: 'success'})
 });
 
@@ -40,7 +66,7 @@ router.post('/userGoing', authNoUser, (req, res) => {
   // console.log('req.currentUser:', req.currentUser)
   if(!req.currentUser){
     res.status(200).json({message: 'noArrNecessary'})
-  }
+  } else if(req.currentUser) {
 
 let arr = [];
 async function asyncForEach(array, callback) {
@@ -66,6 +92,8 @@ start().then(response => {
     console.log('arr:',arr);
     res.json({ venues })}
     )  */
+  }
+
 
 });
 
@@ -93,7 +121,7 @@ const start = async () => {
 
 // console.log('route showGoing')
 start().then(response =>
-    res.status(200).json({ getList: arr })  //Get LIST IS THE ISSUE FIX /GOING TOMORROW!!!!!         
+    res.status(200).json({ getList: arr })         
   ).catch(err => console.log(err) );
 
 });
@@ -103,23 +131,29 @@ router.post('/going', authenticate, (req, res) => {
   // console.log(req.currentUser._id);
   // console.log(req.body)
   // console.log('id:', id);
-  Venue.findOrCreate({ id, "userId": ObjectId(req.currentUser.id) }, function(err, venue) {
+/*  Venue.findOrCreate({ id, "userId": ObjectId(req.currentUser.id) }, function(err, venue) {
     if(err) throw err;
     console.log('Found or Created: ', venue);
-  });
-    res.json({success: true}).end();
-/*  Venue.findOne({"userId" : ObjectId(req.currentUser.id), "id": id})
+  });*/
+    // res.json({success: true}).end();
+  Venue.findOne({"userId" : ObjectId(req.currentUser.id), "id": id})
     .then(response => {
      if(response){
       Venue.remove({ userId: req.currentUser.id, id: id })
           .then(res.status(200).json({ error: "can\'t vote twice" }) )
           .catch(err => res.status(400).json({ errors: parseErrors(err.errors) }))      
    } else if(!response) {
-    Venue.create({ userId: req.currentUser.id, id: id }) //test save()
+    console.log('id:',id)
+    console.log("userId: ", ObjectId(req.currentUser.id) )
+/*    Venue.create({ userId: req.currentUser.id, id: id }) //test save()
       .then(venue => res.status(200).json({ venue: id }) )
-      .catch(err => res.status(400).json({ errors: parseErrors(err.errors) }));      
+      .catch(err => res.status(400).json({ errors: parseErrors(err.errors) }));      */
+      Venue.findOrCreate({ id, "userId": ObjectId(req.currentUser.id) }, function(err, venue) {
+    if(err) console.log('err33:', err)//throw err;
+    console.log('Found or Created: ', venue);
+  })//.then(res.json({success: true}).end());  
         }      
-    });*/
+    });
 
 });
 

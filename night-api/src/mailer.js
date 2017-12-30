@@ -37,7 +37,7 @@ export function sendConfirmationEmail(user) {
 		to: user.email,
 		subject: "Welcome to my FCCCoordination App",
 		text: `
-		Welcome to Bookworm. Please, confirm your email.
+		Welcome to Nightapp. Please, confirm your email by clicking the link.
 
 		${user.generateConfirmationUrl()}
 		`

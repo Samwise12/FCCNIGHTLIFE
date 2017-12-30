@@ -1,3 +1,24 @@
+body {
+  background: #e4e6e7;
+}
+.ui.container, media {
+	/*border:1px solid red;*/
+	margin-left: 1em !important;
+	padding:0px;
+	width: 98%;
+}
+#mapMove {
+	/*border: 1px solid red;*/
+	float: right;
+	position: relative;
+}
+#homepage {
+	position: relative;
+	display: inline;
+}
+/*.showborder {border: 1px solid red;}*/
+/*#showborder2 {border: 1px solid green;}*/
+/*///////////////////////*/
 .ui.image img, .ui.image svg {
 	height: 180px;
 	max-width: 120px;
@@ -47,3 +68,132 @@
 }
 
 /*///////////////////////*/
+#searchbox {
+	position: relative;
+/*	border:1px solid red;*/
+	width:300px;
+	max-width: 300px;
+	top: -83px;
+	left:180px;
+ }
+.ui.form {
+	position: relative;
+    max-width: 300px;
+}
+#form1 {
+	position: relative;
+    max-width: 0%;
+}
+.ui.fluid.input>input {
+	width: 300px !important;
+}
+.ui.action.input:not([class*="left action"])>
+.button:last-child, .ui.action.input:not([class*="left action"])>
+.buttons:last-child>.button, .ui.action.input:not([class*="left action"])>
+.dropdown:last-child {
+	position: relative;
+/*	border:1px solid red;*/	
+	top: -83px;
+	left:180px;	
+	background:  #595959;
+}
+ #display {
+ 	/*max-height: 80px !important;*/
+ 	/*max-width: 400px !important;*/
+ 	/*border: 2px solid yellow;*/
+ 	height: 640px;
+ 	/*max-height: 400px;*/
+ 	width:100%;
+ 	display:flex;
+ 	flex-flow: column;
+ 	overflow: scroll;  overflow-x:hidden;
+ }
+#display > .ui.list {
+  flex-flow: column wrap;
+  max-height: inherit;
+  width: inherit;
+  height:inherit;
+  margin:0;
+  /*border: 2px solid purple;*/
+}
+#display > .ui.list > .item {
+	flex: 0 0 auto;
+/*	border: 3px solid purple;*/
+	}
+/*///////////////////////*/
+.AnyReactComponent{
+	position:absolute;
+	width:35px;
+	height:35px;
+	left:-17px;
+	top:-35px;
+	background: transparent;
+	cursor:pointer;
+}
+#test1 {	
+	font-family:"Comic Sans MS", Times, serif;
+	font-size:1.1em;
+	color:black;
+	background: #eed0b8;
+}
+#test2 {	
+	font-family:"Comic Sans MS", Times, serif;
+	font-size:1.5em;
+	color: black;
+}
+.ui.top.popup:before {
+	background: #eed0b8;
+}
+
+#makeTransparent {
+	background: none;
+	padding:0;
+}
+.ui.icon.button>.icon, .ui.icon.buttons .button>.icon {
+	opacity: 1;
+    margin: 0!important;
+    vertical-align: top;
+}
+/*.ui.icon.button, .ui.icon.buttons .button {
+	background: none;
+}*/
+.ui.grid {
+	/*border: 1px solid blue;*/
+	margin-top: -30px;	
+}
+.ui.loading.form:after {
+	position: fixed;
+	/*left: 200px;*/
+	/*top: 100%;*/
+	height:7em;
+	width:7em;
+}
+/*////////////////////////////////*/
+/*If I wanted a background VIDEO*/
+/*video { 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+ background: url('https://storage.googleapis.com/cover_video/Snapshots/The-DJ.jpg') no-repeat;
+  background-size: cover;
+  transition: 1s opacity;
+   opacity: .5;
+}
+.stopfade { 
+   opacity: .2;
+}
+
+@media screen and (max-width: 500px) { 
+  div{width:70%;} 
+}
+@media screen and (max-device-width: 800px) {
+  html { background: url(https://storage.googleapis.com/cover_video/Snapshots/The-DJ.jpg) #000 no-repeat center center fixed; }
+  #bgvid { display: none; }
+}
+*/

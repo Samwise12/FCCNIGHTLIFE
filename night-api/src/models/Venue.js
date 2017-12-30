@@ -39,7 +39,7 @@ Aschema.statics.findOrCreate = function (params, done) {
         			expirationDate: expDate
 				});
 				venue.save(function(err) {
-						if (err) console.log(err);
+						if (err) console.log('err1: ', err);
 						// console.log('here1');
 						return done(err, venue);
 				});

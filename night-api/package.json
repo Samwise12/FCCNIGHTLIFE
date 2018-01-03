@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon --exec babel-node -- src/index.js",
     "build": "babel src --out-dir ./build",
-    "serve": "node --exec -- ./build/index.js"
+    "serve": "node ./build/index.js"
   },
   "dependencies": {
     "bcrypt": "^1.0.3",

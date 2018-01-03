@@ -2,7 +2,10 @@
   "name": "night-api",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT",
+  "engines": {
+    "node": "9.0.0"
+  },
+  "license": "ISC",
   "scripts": {
     "start": "cd night-api && npm run serve",
     "heroku-postbuild": "cd night-react/ && yarn --production=false && yarn run build"

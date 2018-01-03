@@ -4,9 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon --exec babel-node -- src/index.js",
-    "build": "babel src --out-dir ./build",
-    "serve": "node ./build/index.js"
+    "start": "cd night-api && npm run serve",
+    "heroku-postbuild": "cd night-react/ && yarn --production=false && yarn run build"
   },
   "dependencies": {
     "bcrypt": "^1.0.3",

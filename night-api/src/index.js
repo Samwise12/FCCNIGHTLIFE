@@ -1,18 +1,22 @@
 import express from 'express';
 import path from 'path';
+import bodyParser from 'body-parser';
+if (process.env.NODE_ENV !== 'production'){
+	const dotenv = require('dotenv');
+}
 import mongoose from 'mongoose';
 import mongodb from 'mongodb';
-import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
 import Promise from 'bluebird';
 import cors from 'cors';
 import morgan from 'morgan';
+
+if (process.env.NODE_ENV !== 'production'){require('dotenv').config()}
+const PORT = process.env.PORT || 8080;
 
 import data from './routes/data'; 
 import auth from './routes/auth';
 import users from './routes/users';
 
-dotenv.config();
 
 const app = express();
 // app.use(morgan('combined'));
@@ -32,8 +36,9 @@ app.use('/api/data', data);
 app.use('/api/auth', auth);
 app.use('/api/users', users);
 
-app.get('/*', (req, res) => {
-	res.sendFile(path.join(__dirname, 'index.html'));
+app.get('*', (req, res) => {
+	// res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.resolve(__dirname, '../../night-api/build', 'index.html'));	
 })
 
-app.listen(8080, () => console.log('Running on localhost:8080'));
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

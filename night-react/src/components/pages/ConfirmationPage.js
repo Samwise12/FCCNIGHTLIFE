@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { Message, Icon } from "semantic-ui-react";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
 import { confirm } from '../../actions/auth';
+import setAuthorizationHeader from '../../utils/setAuthorizationHeader';
 
 class ConfirmationPage extends React.Component {
 	state = {
@@ -14,7 +16,10 @@ class ConfirmationPage extends React.Component {
 	componentDidMount() {
 		this.props
 			.confirm(this.props.match.params.token)
-			.then(() => this.setState({ loading: false, success: true }))
+			.then(() => {
+				setAuthorizationHeader(this.props.match.params.token);
+				this.setState({ loading: false, success: true });
+			})
 			.catch(() => this.setState({ loading: false, success: false}));
 	}
 

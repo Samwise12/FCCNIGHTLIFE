@@ -54,7 +54,7 @@ if (process.env.NODE_ENV !== 'production') {
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 5000;
 
 var app = (0, _express2.default)();
 // app.use(morgan('combined'));

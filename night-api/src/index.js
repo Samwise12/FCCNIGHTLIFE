@@ -20,6 +20,7 @@ import users from './routes/users';
 
 const app = express();
 // app.use(morgan('combined'));
+app.use(express.static(path.resolve(__dirname, '../../night-react/build')));
 app.use(bodyParser.json());
 app.use(cors());
 

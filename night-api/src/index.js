@@ -11,7 +11,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 
 if (process.env.NODE_ENV !== 'production'){require('dotenv').config()}
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5000;
 
 import data from './routes/data'; 
 import auth from './routes/auth';

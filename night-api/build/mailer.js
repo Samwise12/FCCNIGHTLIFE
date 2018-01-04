@@ -52,7 +52,7 @@ function sendConfirmationEmail(user) {
 	};
 
 	transporter.sendMail(email, function (err, res) {
-		if (err) return console.log('Error');
+		if (err) return console.log('Error:', err);
 		console.log('Email Sent');
 		console.log(res);
 	});
@@ -68,7 +68,7 @@ function sendResetPasswordEmail(user) {
 	};
 
 	transporter.sendMail(email, function (err, res) {
-		if (err) return console.log('Error');
+		if (err) return console.log('Error:', err);
 		console.log('Email Sent');
 		console.log(res);
 	});

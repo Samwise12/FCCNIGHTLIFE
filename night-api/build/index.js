@@ -4,6 +4,8 @@ var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
 
+require('babel-polyfill');
+
 var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);

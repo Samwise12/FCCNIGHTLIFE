@@ -1,4 +1,5 @@
 import express from 'express';
+import "babel-polyfill";
 import path from 'path';
 import bodyParser from 'body-parser';
 if (process.env.NODE_ENV !== 'production'){

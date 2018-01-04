@@ -133,6 +133,8 @@ const ListBars = (cache, props, method1, numGoing, userList=[], reviews) => {// 
           } />          
           <br /><br />
           <Rating icon='star' defaultRating={thing.rating} maxRating={5} disabled/>
+          <br /><br />
+          {reviews[index]}
           </List.Description>
         </List.Content>
         <hr />

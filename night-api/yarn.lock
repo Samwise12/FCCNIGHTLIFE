@@ -2831,8 +2831,8 @@ yallist@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-2.1.2.tgz#1c11f9218f076089a47dd512f93c6699a6a81d52"
 
-yelp-fusion@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/yelp-fusion/-/yelp-fusion-1.0.4.tgz#448cda8573f39bb9886c2ff79ce773ed70e7c5c0"
+yelp-fusion@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/yelp-fusion/-/yelp-fusion-2.0.3.tgz#701ef2c902eac8cf4b2ba53dd952a70d878244f8"
   dependencies:
     "@tonybadguy/call-me-maybe" "^2.0.1"

@@ -15,13 +15,14 @@ router.post('/', (req, res) => {
 	// console.log('req:',req.body)
 	// console.log('worked??');
   const { locationName } = req.body;
-  	yelp.accessToken(process.env.YELP_CLIENT_ID, process.env.YELP_CLIENT_SECRET)
-      .then(response => {
+    // yelp.accessToken(process.env.YELP_CLIENT_ID, process.env.YELP_CLIENT_SECRET)
+      // .then(response => {
         // const accessToken = response.jsonBody.access_token;
         // console.log(accessToken);
-        const client = yelp.client(response.jsonBody.access_token);
+        // const client = yelp.client(response.jsonBody.access_token);
         // console.log(client)
-        if(locationName === '') {res.status(404).json({no: 'no!'})}
+        // if(locationName === '') {res.status(404).json({no: 'no!'})}
+        const client = yelp.client(process.env.YELP_API);
     client.search({
     	term: 'bars',
     	location: locationName, //'New York, NY',
@@ -54,7 +55,7 @@ router.post('/', (req, res) => {
       res.status(200).json({data: response.jsonBody.businesses, reviews: arr3 })
       }).catch(e => console.log(e));*/
     }).catch(err => console.log(err));
-      }).catch(err=> {console.log(err);});
+      // }).catch(err=> {console.log(err);});
 
     // res.status(200).json({data: response.jsonBody.businesses, reviews: arr3 })
 	// res.status(200).json({success: 'success'})

@@ -92,7 +92,7 @@ router.post('/', function (req, res) {
                   arr4.push(response2.jsonBody.reviews[0].text);
                   // res.status(200).json({data: response.jsonBody.businesses, reviews: arr3 })
                 }).catch(function (err) {
-                  console.log(err);done();
+                  console.log(err);
                 });
 
               case 13:
@@ -163,7 +163,7 @@ router.post('/', function (req, res) {
     });
     ;
     test().catch(function (err) {
-      console.log(err);done();
+      console.log(err);
     });
 
     /*client.reviews('the-dead-rabbit-new-york').then(response2 => {
@@ -172,7 +172,7 @@ router.post('/', function (req, res) {
     res.status(200).json({data: response.jsonBody.businesses, reviews: arr3 })
     }).catch(e => console.log(e));*/
   }).catch(function (err) {
-    console.log(err);done();
+    console.log(err);
   });
   // }).catch(err=> {console.log(err);});
 
@@ -381,7 +381,7 @@ router.post('/showGoing', function (req, res) {
   start().then(function (response) {
     return res.status(200).json({ getList: arr });
   }).catch(function (err) {
-    console.log(err);done();
+    console.log(err);
   });
 });
 

@@ -41,20 +41,20 @@ router.post('/', (req, res) => {
         // console.log(arr3)
         arr4.push(response2.jsonBody.reviews[0].text)
       // res.status(200).json({data: response.jsonBody.businesses, reviews: arr3 })
-      }).catch(err => {console.log(err);done()});
+      }).catch(err => {console.log(err)});
       };
       // console.log(await arr4 )        
       // let arr5 = [] // REMOVE WAITING FOR LOAD TIME SEARCH LOCATION USE ARR4 REVIEWS BELOW TO USE REVIEWS
        res.status(200).json({data: response.jsonBody.businesses, reviews: arr4, regionCenter:regionCenter })
       };
-      test().catch(err => {console.log(err);done()});
+      test().catch(err => {console.log(err);});
 
       /*client.reviews('the-dead-rabbit-new-york').then(response2 => {
         // console.log(response2.jsonBody.reviews[0].text)
         // console.log(arr3)
       res.status(200).json({data: response.jsonBody.businesses, reviews: arr3 })
       }).catch(e => console.log(e));*/
-    }).catch(err => {console.log(err);done()});
+    }).catch(err => {console.log(err);});
       // }).catch(err=> {console.log(err);});
 
     // res.status(200).json({data: response.jsonBody.businesses, reviews: arr3 })
@@ -125,7 +125,7 @@ const start = async () => {
 // console.log('route showGoing')
 start().then(response =>
     res.status(200).json({ getList: arr })         
-  ).catch(err => {console.log(err);done();} );
+  ).catch(err => {console.log(err)} );
 
 });
 

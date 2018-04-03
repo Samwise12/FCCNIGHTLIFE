@@ -84,6 +84,7 @@ const start = async () => {
     });     
   })
   // console.log('arr: ',arr);
+     return Promise.resolve(true);
 }  
 start().then(response => {
   res.status(200).json({userList: arr})

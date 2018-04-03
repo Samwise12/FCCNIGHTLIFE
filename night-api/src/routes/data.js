@@ -45,7 +45,7 @@ router.post('/', (req, res) => {
       };
       // console.log(await arr4 )        
       // let arr5 = [] // REMOVE WAITING FOR LOAD TIME SEARCH LOCATION USE ARR4 REVIEWS BELOW TO USE REVIEWS
-       res.status(200).json({data: response.jsonBody.businesses, reviews: arr4, regionCenter:regionCenter }).end();
+       res.status(200).json({data: response.jsonBody.businesses, reviews: arr4, regionCenter:regionCenter })
       };
       test().catch(err => {console.log(err);done()});
 
@@ -87,7 +87,7 @@ const start = async () => {
 }  
 start().then(response => {
   res.status(200).json({userList: arr})
-}).catch(err => {console.log(err);done();});
+}).catch(err => console.log(err);done());
 /*  Venue.find({"userId" : ObjectId(req.currentUser.id)})
   .then(venues => {
     console.log('arr:',arr);
@@ -118,6 +118,7 @@ const start = async () => {
 
   })
   // console.log('arr: ',arr);
+   return Promise.resolve(true);
 }
 
 // console.log('route showGoing')

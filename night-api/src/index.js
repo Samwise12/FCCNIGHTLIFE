@@ -27,6 +27,16 @@ app.use(cors());
 
 mongoose.Promise = global.Promise *fix mpromise issue without bluebird
 // mongoose.Promise = Promise;
+process.on('unhandledRejection', error => {
+  // Will print "unhandledRejection err is not defined"
+  console.log('unhandledRejection', error.message);
+});
+
+new Promise((_, reject) => reject(new Error('woops'))).
+  catch(error => {
+    // Will not execute
+    console.log('caught', err.message);
+  });
 const dbUrl = process.env.MONGODB_URI /*|| process.env.MONGODB_URL*/;
 
 mongoose.connect(dbUrl,

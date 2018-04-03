@@ -45,7 +45,7 @@ router.post('/', (req, res) => {
       };
       // console.log(await arr4 )        
       // let arr5 = [] // REMOVE WAITING FOR LOAD TIME SEARCH LOCATION USE ARR4 REVIEWS BELOW TO USE REVIEWS
-       res.status(200).json({data: response.jsonBody.businesses, reviews: arr4, regionCenter:regionCenter })
+       res.status(200).json({data: response.jsonBody.businesses, reviews: arr4, regionCenter:regionCenter }).end();
       };
       test().catch(err => {console.log(err);done()});
 

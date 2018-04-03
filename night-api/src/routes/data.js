@@ -87,7 +87,7 @@ const start = async () => {
 }  
 start().then(response => {
   res.status(200).json({userList: arr})
-}).catch(err => console.log(err);done());
+}).catch(err => console.log(err));
 /*  Venue.find({"userId" : ObjectId(req.currentUser.id)})
   .then(venues => {
     console.log('arr:',arr);

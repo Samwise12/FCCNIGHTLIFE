@@ -47,7 +47,7 @@ router.post('/', (req, res) => {
       // let arr5 = [] // REMOVE WAITING FOR LOAD TIME SEARCH LOCATION USE ARR4 REVIEWS BELOW TO USE REVIEWS
        res.status(200).json({data: response.jsonBody.businesses, reviews: arr4, regionCenter:regionCenter })
       };
-      test();
+      test().catch(err => console.log(err));
 
       /*client.reviews('the-dead-rabbit-new-york').then(response2 => {
         // console.log(response2.jsonBody.reviews[0].text)

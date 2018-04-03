@@ -54,7 +54,7 @@ router.post('/', (req, res) => {
         // console.log(arr3)
       res.status(200).json({data: response.jsonBody.businesses, reviews: arr3 })
       }).catch(e => console.log(e));*/
-    }).catch(err => console.log(err));
+    }).catch(err => console.log(err);done());
       // }).catch(err=> {console.log(err);});
 
     // res.status(200).json({data: response.jsonBody.businesses, reviews: arr3 })

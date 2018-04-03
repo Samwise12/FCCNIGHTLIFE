@@ -41,7 +41,7 @@ router.post('/', (req, res) => {
         // console.log(arr3)
         arr4.push(response2.jsonBody.reviews[0].text)
       // res.status(200).json({data: response.jsonBody.businesses, reviews: arr3 })
-      })
+      }).catch(err => console.log(err);)
       };
       // console.log(await arr4 )        
       // let arr5 = [] // REMOVE WAITING FOR LOAD TIME SEARCH LOCATION USE ARR4 REVIEWS BELOW TO USE REVIEWS

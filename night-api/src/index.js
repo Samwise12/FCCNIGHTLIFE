@@ -20,14 +20,15 @@ import users from './routes/users';
 
 
 const app = express();
-// app.use(morgan('combined'));
+app.use(morgan('combined'));
 app.use(express.static(path.resolve(__dirname, '../../night-react/build')));
 app.use(bodyParser.json());
 app.use(cors());
 
 // mongoose.Promise = global.Promise *fix mpromise issue without bluebird
 mongoose.Promise = Promise;
-const dbUrl = process.env.MONGODB_URI || process.env.MONGODB_URL;
+const dbUrl = process.env.MONGODB_URI /*|| process.env.MONGODB_URL*/;
+new Promise((_, reject) => reject({ test: 'woops!' })).catch(() => {});
 mongoose.connect(dbUrl,
  { useMongoClient: true }).then(
  () => {console.log('mongodb running local mongodb')},

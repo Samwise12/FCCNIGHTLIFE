@@ -59,14 +59,15 @@ if (process.env.NODE_ENV !== 'production') {
 var PORT = process.env.PORT || 5000;
 
 var app = (0, _express2.default)();
-// app.use(morgan('combined'));
+app.use((0, _morgan2.default)('combined'));
 app.use(_express2.default.static(_path2.default.resolve(__dirname, '../../night-react/build')));
 app.use(_bodyParser2.default.json());
 app.use((0, _cors2.default)());
 
 // mongoose.Promise = global.Promise *fix mpromise issue without bluebird
 _mongoose2.default.Promise = _bluebird2.default;
-var dbUrl = process.env.MONGODB_URI || process.env.MONGODB_URL;
+var dbUrl = process.env.MONGODB_URI /*|| process.env.MONGODB_URL*/;
+
 _mongoose2.default.connect(dbUrl, { useMongoClient: true }).then(function () {
   console.log('mongodb running local mongodb');
 }, function (err) {

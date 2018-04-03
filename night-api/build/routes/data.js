@@ -43,7 +43,7 @@ var router = _express2.default.Router();
 
 router.post('/', function (req, res) {
   // console.log('req:',req.body)
-  // console.log('worked??');
+  console.log('worked??');
   var locationName = req.body.locationName;
   // yelp.accessToken(process.env.YELP_CLIENT_ID, process.env.YELP_CLIENT_SECRET)
   // .then(response => {
@@ -91,6 +91,8 @@ router.post('/', function (req, res) {
                   // console.log(arr3)
                   arr4.push(response2.jsonBody.reviews[0].text);
                   // res.status(200).json({data: response.jsonBody.businesses, reviews: arr3 })
+                }).catch(function (err) {
+                  console.log(err);done();
                 });
 
               case 13:
@@ -160,7 +162,9 @@ router.post('/', function (req, res) {
       return arr3.push(res2.id);
     });
     ;
-    test();
+    test().catch(function (err) {
+      console.log(err);done();
+    });
 
     /*client.reviews('the-dead-rabbit-new-york').then(response2 => {
       // console.log(response2.jsonBody.reviews[0].text)
@@ -168,7 +172,7 @@ router.post('/', function (req, res) {
     res.status(200).json({data: response.jsonBody.businesses, reviews: arr3 })
     }).catch(e => console.log(e));*/
   }).catch(function (err) {
-    return console.log(err);
+    console.log(err);done();
   });
   // }).catch(err=> {console.log(err);});
 
@@ -255,6 +259,9 @@ router.post('/userGoing', _authNoUser2.default, function (req, res) {
                 }());
 
               case 2:
+                return _context4.abrupt('return', Promise.resolve(true));
+
+              case 3:
               case 'end':
                 return _context4.stop();
             }
@@ -355,6 +362,9 @@ router.post('/showGoing', function (req, res) {
               }());
 
             case 2:
+              return _context7.abrupt('return', Promise.resolve(true));
+
+            case 3:
             case 'end':
               return _context7.stop();
           }
@@ -371,7 +381,7 @@ router.post('/showGoing', function (req, res) {
   start().then(function (response) {
     return res.status(200).json({ getList: arr });
   }).catch(function (err) {
-    return console.log(err);
+    console.log(err);done();
   });
 });
 

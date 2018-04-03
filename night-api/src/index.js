@@ -7,7 +7,7 @@ if (process.env.NODE_ENV !== 'production'){
 }
 import mongoose from 'mongoose';
 import mongodb from 'mongodb';
-import Promise from 'bluebird';
+// import Promise from 'bluebird';
 import cors from 'cors';
 import morgan from 'morgan';
 
@@ -25,10 +25,10 @@ app.use(express.static(path.resolve(__dirname, '../../night-react/build')));
 app.use(bodyParser.json());
 app.use(cors());
 
-// mongoose.Promise = global.Promise *fix mpromise issue without bluebird
-mongoose.Promise = Promise;
+mongoose.Promise = global.Promise *fix mpromise issue without bluebird
+// mongoose.Promise = Promise;
 const dbUrl = process.env.MONGODB_URI /*|| process.env.MONGODB_URL*/;
-new Promise((_, reject) => reject({ test: 'woops!' })).catch(() => {});
+
 mongoose.connect(dbUrl,
  { useMongoClient: true }).then(
  () => {console.log('mongodb running local mongodb')},

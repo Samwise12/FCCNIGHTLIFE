@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.post('/', (req, res) => {
 	// console.log('req:',req.body)
-	// console.log('worked??');
+	console.log('worked??');
   const { locationName } = req.body;
     // yelp.accessToken(process.env.YELP_CLIENT_ID, process.env.YELP_CLIENT_SECRET)
       // .then(response => {

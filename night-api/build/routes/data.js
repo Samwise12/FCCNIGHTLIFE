@@ -136,7 +136,8 @@ router.post('/', function (req, res) {
 
               case 30:
                 ;
-                // console.log(await arr4 )        
+                // console.log(await arr4 )
+                // console.log(await arr3)        
                 // let arr5 = [] // REMOVE WAITING FOR LOAD TIME SEARCH LOCATION USE ARR4 REVIEWS BELOW TO USE REVIEWS
                 res.status(200).json({ data: response.jsonBody.businesses, reviews: arr4, regionCenter: regionCenter });
 
@@ -159,7 +160,7 @@ router.post('/', function (req, res) {
         arr4 = [],
         regionCenter = response.jsonBody.region.center;
     response.jsonBody.businesses.forEach(function (res2) {
-      return arr3.push(res2.id);
+      return arr3.push(res2.alias);
     });
     ;
     test().catch(function (err) {

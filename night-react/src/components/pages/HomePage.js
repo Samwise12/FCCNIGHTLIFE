@@ -53,7 +53,7 @@ class HomePage extends React.Component {
   componentWillReceiveProps(nextProps) {
     // console.log(!!nextProps.stuff)
     // console.log(nextProps.Lamb[0][1])
-    console.log(nextProps.stuff)
+    // console.log(nextProps.stuff)
     let arr = [];
     if(nextProps.stuff.length>0) {
       for(let [index,i] of nextProps.stuff.entries()) {    

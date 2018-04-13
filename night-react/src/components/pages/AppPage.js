@@ -219,12 +219,13 @@ class App extends Component {  //HomePage is container
         let locations = {};
         for (let i =0; i<res.data.data.length ;i++){
          // console.log(res.data.data[i].id) 
-         locations[res.data.data[i].id] = res.data.data[i].coordinates;
+         locations[res.data.data[i].alias] = res.data.data[i].coordinates;
          // res.data.data[i].id 
         }
         // console.log(locations)
         // console.log(res.data.data[0])
         let sendLocations = Object.entries(locations);
+        // console.log(sendLocations);
         this.props.locationSend(sendLocations)        
 
         this.setState({loading:false, cache: res.data.data, reviews: res.data.reviews, update: true});

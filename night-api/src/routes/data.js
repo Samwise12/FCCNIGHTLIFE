@@ -31,7 +31,7 @@ router.post('/', (req, res) => {
    		// console.log(response.jsonBody.region.center)
       // console.log('response.body:',response.jsonBody.businesses)
       let arr3 = [], arr4=[], regionCenter=response.jsonBody.region.center;
-      response.jsonBody.businesses.forEach(res2 => arr3.push(res2.id))
+      response.jsonBody.businesses.forEach(res2 => arr3.push(res2.alias))
       async function test() {
       const arr4 = [];
       for (let [index, h] of arr3.entries()) {
@@ -43,7 +43,8 @@ router.post('/', (req, res) => {
       // res.status(200).json({data: response.jsonBody.businesses, reviews: arr3 })
       }).catch(err => {console.log(err)});
       };
-      // console.log(await arr4 )        
+      // console.log(await arr4 )
+      // console.log(await arr3)        
       // let arr5 = [] // REMOVE WAITING FOR LOAD TIME SEARCH LOCATION USE ARR4 REVIEWS BELOW TO USE REVIEWS
        res.status(200).json({data: response.jsonBody.businesses, reviews: arr4, regionCenter:regionCenter })
       };

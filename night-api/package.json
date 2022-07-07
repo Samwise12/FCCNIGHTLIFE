@@ -19,7 +19,7 @@
     "jsonwebtoken": "^8.1.0",
     "jwt": "^0.2.0",
     "lodash": "^4.17.4",
-    "moment": "^2.19.3",
+    "moment": "^2.29.4",
     "mongodb": "^2.2.33",
     "mongoose": "^4.13.4",
     "mongoose-unique-validator": "^1.0.6",

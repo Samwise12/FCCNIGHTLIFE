@@ -78,6 +78,7 @@ async function asyncForEach(array, callback) {
 };
 const start = async () => {
   await asyncForEach(req.body.data, async (num, i) => {
+    console.log("AAAA");
     await Venue.count({ id: req.body.data[i].id, userId: req.currentUser.id }, (err, c) => {
       // console.log('count:', c)
       arr.push(c)
@@ -89,7 +90,7 @@ const start = async () => {
 }  
 start().then(response => {
   res.status(200).json({userList: arr})
-}).catch(err => console.log(err));
+}).catch(err => console.log("ERRORAAAA",err));
 /*  Venue.find({"userId" : ObjectId(req.currentUser.id)})
   .then(venues => {
     console.log('arr:',arr);
@@ -111,6 +112,7 @@ async function asyncForEach(array, callback) {
   }
 };
 const start = async () => {
+  console.log("BBBB");
   await asyncForEach(req.body.cache, async (num, i) => {
     await Venue.count({ id: req.body.cache[i].id }, (err, c) => {
       // console.log('count:', c)
@@ -126,7 +128,7 @@ const start = async () => {
 // console.log('route showGoing')
 start().then(response =>
     res.status(200).json({ getList: arr })         
-  ).catch(err => {console.log(err)} );
+  ).catch(err => {console.log("ERRORBBBB",err)} );
 
 });
 

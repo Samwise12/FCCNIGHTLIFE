@@ -239,14 +239,15 @@ router.post('/userGoing', _authNoUser2.default, function (req, res) {
                       while (1) {
                         switch (_context3.prev = _context3.next) {
                           case 0:
-                            _context3.next = 2;
+                            console.log("AAAA");
+                            _context3.next = 3;
                             return _Venue2.default.count({ id: req.body.data[i].id, userId: req.currentUser.id }, function (err, c) {
                               // console.log('count:', c)
                               arr.push(c);
                               // console.log(arr)
                             });
 
-                          case 2:
+                          case 3:
                           case 'end':
                             return _context3.stop();
                         }
@@ -277,7 +278,7 @@ router.post('/userGoing', _authNoUser2.default, function (req, res) {
     start().then(function (response) {
       res.status(200).json({ userList: arr });
     }).catch(function (err) {
-      return console.log(err);
+      return console.log("ERRORAAAA", err);
     });
     /*  Venue.find({"userId" : ObjectId(req.currentUser.id)})
       .then(venues => {
@@ -335,7 +336,8 @@ router.post('/showGoing', function (req, res) {
         while (1) {
           switch (_context7.prev = _context7.next) {
             case 0:
-              _context7.next = 2;
+              console.log("BBBB");
+              _context7.next = 3;
               return asyncForEach(req.body.cache, function () {
                 var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(num, i) {
                   return regeneratorRuntime.wrap(function _callee6$(_context6) {
@@ -362,10 +364,10 @@ router.post('/showGoing', function (req, res) {
                 };
               }());
 
-            case 2:
+            case 3:
               return _context7.abrupt('return', Promise.resolve(true));
 
-            case 3:
+            case 4:
             case 'end':
               return _context7.stop();
           }
@@ -382,7 +384,7 @@ router.post('/showGoing', function (req, res) {
   start().then(function (response) {
     return res.status(200).json({ getList: arr });
   }).catch(function (err) {
-    console.log(err);
+    console.log("ERRORBBBB", err);
   });
 });
 
